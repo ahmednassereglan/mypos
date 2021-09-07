@@ -22,46 +22,49 @@
             
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                              <h3 class="card-title">Quick Example</h3>
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                              <h3 class="box-title">@lang('site.users')</h3>
                             </div>
-                            <!-- /.card-header -->
+                            <!-- /.box-header -->
                             <!-- form start -->
-                            <form>
-                              <div class="card-body">
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Email address</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputFile">File input</label>
-                                  <div class="input-group">
-                                    <div class="custom-file">
-                                      <input type="file" class="custom-file-input" id="exampleInputFile">
-                                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                      <span class="input-group-text">Upload</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="form-check">
-                                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                              </div>
-                              <!-- /.card-body -->
-              
-                              <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                              </div>
-                            </form>
+                            @if ($users->count() > 0)
+                              <div class="box-body">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <th>#</th>
+                                    <th>@lang('site.first_name')</th>
+                                    <th>@lang('site.last_name')</th>
+                                    <th>@lang('site.email')</th>
+                                    <th>@lang('site.action')</th>
+                                    
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($users as $index=>$user )
+                                      <tr>
+                                        <td>{{ $index +1 }}</td>
+                                        <td>{{ $user->first_name }}</td>
+                                        <td>{{ $user->last_name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>
+                                          <a class="btn btn-info" href="{{ route('dashboard.users.edit', $user->id) }}">@lang('site.edit')</a>
+                                          <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" style="display: inline-block">
+                                            {{ csrf_field() }}
+                                            {{ method_field('delete') }}
+                                            <button type="submit" class="btn btn-danger">@lang('site.delete')</button>
+                                          </form>
+                                        </td>
+                                        
+                                      </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+
+                              </div><!-- /.box-body -->
+                            @else
+                              @lang('site.no_data_found')
+                            @endif
                         </div>
                           <!-- /.card -->
                     </div>
