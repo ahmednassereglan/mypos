@@ -22,36 +22,28 @@
                     <div class="col-md-12">
                         <div class="box box-primary">
                             <div class="box-header">
-                              <h3 class="box-title">@lang('site.users')</h3> 
+                              <h3 class="box-title">@lang('site.edit')</h3> 
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
 
                                 @include('partials._errors')
+ 
 
-
-                                <form action="{{ route('dashboard.users.store') }}" method="post">
+                                <form action="{{ route('dashboard.users.update',$user->id) }}" method="post">
                                     {{ csrf_field() }}
-                                    {{ method_field('post') }}
+                                    {{ method_field('put') }}
                                     <div class="form-group">
                                         <label>@lang('site.first_name')</label>
-                                        <input class="form-control" type="text"  value="{{ old('first_name') }}" name="first_name">
+                                        <input class="form-control" type="text"  value="{{ $user->first_name }}" name="first_name">
                                     </div>
                                     <div class="form-group">
                                         <label>@lang('site.last_name')</label>
-                                        <input class="form-control" type="text"  value="{{ old('last_name') }}" name="last_name">
+                                        <input class="form-control" type="text"  value="{{ $user->last_name }}" name="last_name">
                                     </div>
                                     <div class="form-group">
                                         <label>@lang('site.email')</label>
-                                        <input class="form-control" type="email"  value="{{ old('email') }}" name="email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>@lang('site.password')</label>
-                                        <input class="form-control" type="password" name="password">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>@lang('site.password_confirmation')</label>
-                                        <input class="form-control" type="password" name="password_confirmation">
+                                        <input class="form-control" type="email"  value="{{ $user->email }}" name="email">
                                     </div>
 
                                     <div class="form-group">
@@ -77,7 +69,7 @@
                                                @foreach($models as $index => $model)
                                                     <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{$model}}" role="tabpanel" aria-labelledby="{{$model}}-tab">
                                                         @foreach($maps as $key => $map)
-                                                            <label><input type="checkbox" value="{{ $model .'-'. $map }}" name="permissions[]"> @lang('site.'.$map)</label><br>
+                                                            <label><input type="checkbox" {{ $user->hasPermission($model .'-'. $map) ? 'checked' : '' }} value="{{ $model .'-'. $map }}" name="permissions[]"> @lang('site.'.$map)</label><br>
                                                         @endforeach
                                                         
                                                     </div><!-- /.tab-pane -->
@@ -88,11 +80,9 @@
                                             </div><!-- /.card-body -->
                                           </div><!-- /.card -->
                                     </div>
-                                
-                                    
-        
+
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> @lang('site.create')</button>
+                                        <button class="btn btn-primary" type="submit"><i class="fa fa-edit" aria-hidden="true"></i> @lang('site.edit')</button>
                                     </div>
                                 </form>
                             </div>
