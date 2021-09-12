@@ -10,7 +10,7 @@ Route::group(
     ], 
     function(){ 
         
-        Route::prefix('dashboard')->name('dashboard.')->group(function(){
+        Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function(){
 
 
             Route::get('/index', 'DashboardController@index')->name('index');

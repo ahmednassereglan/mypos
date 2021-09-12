@@ -15,7 +15,9 @@ return [
         'super_admin' => [
             'users' => 'c,r,u,d',
             
-        ]
+        ],
+        'admin' => []
+        
         // ,
         // 'role_name' => [
         //     'module_1_name' => 'c,r,u,d',

@@ -15,6 +15,25 @@
                 <li>@lang('site.users')</li>
             </ol>
 
+            <br>
+            <form action="" method="post">
+              <div class="row">
+                <div class="col-md-4">
+                  <input type="text" name="search" placeholder="@lang('site.search')" class="form-control">
+                </div>
+                <div class="col-md-4">
+                  <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> @lang('site.search')</button>
+                  
+                  @if(auth()->user()->hasPermission('users-create'))
+                    <a class="btn btn-success" href="{{ route('dashboard.users.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('site.add')</a>
+                  @else
+                    <button class="btn btn-success disabled"><i class="fa fa-plus" aria-hidden="true"></i> @lang('site.create')</button>
+                  @endif
+                </div>
+              </div>
+            </form>
+            
+
         </section>
 
         <section class="content">
@@ -25,13 +44,15 @@
                     <div class="col-md-12">
                         <div class="box box-primary">
                             <div class="box-header">
-                              <h3 class="box-title">@lang('site.users')</h3>
+                              <h3 class="box-title">@lang('site.users')</h3> 
+
+                              
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
                             @if ($users->count() > 0)
                               <div class="box-body">
-                                <table class="table table-bordered">
+                                <table class="table table-hover">
                                   <thead>
                                     <th>#</th>
                                     <th>@lang('site.first_name')</th>
@@ -48,12 +69,20 @@
                                         <td>{{ $user->last_name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                          <a class="btn btn-info" href="{{ route('dashboard.users.edit', $user->id) }}">@lang('site.edit')</a>
-                                          <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" style="display: inline-block">
-                                            {{ csrf_field() }}
-                                            {{ method_field('delete') }}
-                                            <button type="submit" class="btn btn-danger">@lang('site.delete')</button>
-                                          </form>
+                                          @if(auth()->user()->hasPermission('users-update'))
+                                            <a class="btn btn-info" href="{{ route('dashboard.users.edit', $user->id) }}">@lang('site.edit')</a>
+                                          @else
+                                            <button class="btn btn-info disabled">@lang('site.edit')</button>
+                                          @endif
+                                          @if(auth()->user()->hasPermission('users-delete'))
+                                            <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" style="display: inline-block">
+                                              {{ csrf_field() }}
+                                              {{ method_field('delete') }}
+                                              <button type="submit" class="btn btn-danger">@lang('site.delete')</button>
+                                            </form>
+                                          @else
+                                            <button class="btn btn-danger disabled">@lang('site.delete')</button>
+                                          @endif
                                         </td>
                                         
                                       </tr>
