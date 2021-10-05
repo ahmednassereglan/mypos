@@ -19,7 +19,7 @@
             <form action="{{ route('dashboard.users.index') }}" method="get">
               <div class="row">
                 <div class="col-md-4">
-                  <input type="text" name="search" placeholder="@lang('site.search')" class="form-control">
+                  <input type="text" name="search" placeholder="@lang('site.search')" class="form-control" value="{{ request()->search }}">
                 </div>
                 <div class="col-md-4">
                   <button class="btn btn-primary" type="submit"> @lang('site.search') <i class="fa fa-search" aria-hidden="true"></i></button>
@@ -44,7 +44,7 @@
                     <div class="col-md-12">
                         <div class="box box-primary">
                             <div class="box-header">
-                              <h3 class="box-title">@lang('site.users')</h3> 
+                              <h3 class="box-title">@lang('site.users')  <small>{ {{ $users->total() }} }</small></h3> 
 
                               
                             </div>
@@ -78,7 +78,7 @@
                                             <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" style="display: inline-block">
                                               {{ csrf_field() }}
                                               {{ method_field('delete') }}
-                                              <button type="submit" class="btn btn-danger">@lang('site.delete') <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                              <button type="submit" class="btn btn-danger delete">@lang('site.delete') <i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
                                           @else
                                             <button class="btn btn-danger disabled"> @lang('site.delete') <i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -89,6 +89,8 @@
                                     @endforeach
                                   </tbody>
                                 </table>
+
+                                {{ $users->appends(request()->query())->links() }}
 
                               </div><!-- /.box-body -->
                             @else

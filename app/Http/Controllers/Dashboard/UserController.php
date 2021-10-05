@@ -51,7 +51,7 @@ class UserController extends Controller
         $users = User::whereRoleIs('admin')->when($request->search,function($query) use ($request){
             return $query ->where('first_name','like','%'.$request->search.'%')
             ->orWhere('last_name','like','%'.$request->search.'%');
-        })->get();
+        })->latest()->paginate(2);
 
         // $users = DB::select('select * from users where active = ?', [1])
         // $users = User::WhereRoleIs('admin')->get();
@@ -149,8 +149,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        session()->flash('success',__('site.deleted_successfully') );
+        return redirect()->route('dashboard.users.index');
     }
 }
