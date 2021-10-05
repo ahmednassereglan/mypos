@@ -22,12 +22,12 @@
                   <input type="text" name="search" placeholder="@lang('site.search')" class="form-control">
                 </div>
                 <div class="col-md-4">
-                  <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> @lang('site.search')</button>
+                  <button class="btn btn-primary" type="submit"> @lang('site.search') <i class="fa fa-search" aria-hidden="true"></i></button>
                   
                   @if(auth()->user()->hasPermission('users-create'))
-                    <a class="btn btn-success" href="{{ route('dashboard.users.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> @lang('site.add')</a>
+                    <a class="btn btn-success" href="{{ route('dashboard.users.create') }}"> @lang('site.add') <i class="fa fa-plus" aria-hidden="true"></i></a>
                   @else
-                    <button class="btn btn-success disabled"><i class="fa fa-plus" aria-hidden="true"></i> @lang('site.create')</button>
+                    <button class="btn btn-success disabled"> @lang('site.create') <i class="fa fa-plus" aria-hidden="true"></i></button>
                   @endif
                 </div>
               </div>
@@ -70,18 +70,18 @@
                                         <td>{{ $user->email }}</td>
                                         <td>
                                           @if(auth()->user()->hasPermission('users-update'))
-                                            <a class="btn btn-info" href="{{ route('dashboard.users.edit', $user->id) }}">@lang('site.edit')</a>
+                                            <a class="btn btn-info" href="{{ route('dashboard.users.edit', $user->id) }}">@lang('site.edit') <i class="fa fa-edit" aria-hidden="true"></i></a>
                                           @else
-                                            <button class="btn btn-info disabled">@lang('site.edit')</button>
+                                            <button class="btn btn-info disabled">@lang('site.edit') <i class="fa fa-edit" aria-hidden="true"></i></button>
                                           @endif
                                           @if(auth()->user()->hasPermission('users-delete'))
                                             <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="POST" style="display: inline-block">
                                               {{ csrf_field() }}
                                               {{ method_field('delete') }}
-                                              <button type="submit" class="btn btn-danger">@lang('site.delete')</button>
+                                              <button type="submit" class="btn btn-danger">@lang('site.delete') <i class="fa fa-trash" aria-hidden="true"></i></button>
                                             </form>
                                           @else
-                                            <button class="btn btn-danger disabled">@lang('site.delete')</button>
+                                            <button class="btn btn-danger disabled"> @lang('site.delete') <i class="fa fa-trash" aria-hidden="true"></i></button>
                                           @endif
                                         </td>
                                         

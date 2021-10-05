@@ -30,7 +30,7 @@
                                 @include('partials._errors')
  
 
-                                <form action="{{ route('dashboard.users.update',$user->id) }}" method="post">
+                                <form action="{{ route('dashboard.users.update' , $user->id ) }}" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('put') }}
                                     <div class="form-group">
@@ -68,7 +68,7 @@
                                               <div class="tab-content" id="custom-tabs-four-tabContent">
                                                @foreach($models as $index => $model)
                                                     <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{$model}}" role="tabpanel" aria-labelledby="{{$model}}-tab">
-                                                        @foreach($maps as $key => $map)
+                                                        @foreach($maps as $map)
                                                             <label><input type="checkbox" {{ $user->hasPermission($model .'-'. $map) ? 'checked' : '' }} value="{{ $model .'-'. $map }}" name="permissions[]"> @lang('site.'.$map)</label><br>
                                                         @endforeach
                                                         

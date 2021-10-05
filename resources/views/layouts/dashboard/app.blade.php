@@ -188,7 +188,7 @@
 
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                            {{-- <span class="hidden-xs">{{ Auth::user()->name }} {{ Auth::user()->email }}</span> --}}
+                            <span class="hidden-xs"> {{ Auth::user()->email }}</span>
                         </a>
                         <ul class="dropdown-menu">
 
@@ -196,10 +196,10 @@
                             <li class="user-header">
                                 <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
-                                {{-- <p>
-                                    {{ Auth::user()->name }} {{ Auth::user()->email }}
+                                <p>
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                     <small>Member since 2 days</small>
-                                </p> --}}
+                                </p>
                             </li>
 
                             {{--<!-- Menu Footer-->--}}

@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:users-read')->only('index');
+        $this->middleware('permission:users-create')->only('create');
+        $this->middleware('permission:users-update')->only('edit');
+        $this->middleware('permission:users-delete')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::WhereRoleIs('admin')->get();
         return view('dashboard.users.index',compact('users'));
     }
 
@@ -88,7 +96,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
+            
+        ]);
+
+        $request_data = $request->except(['permissions']);
+        
+        $user->update($request_data);
+
+        $user->syncPermissions($request->permissions);
+        session()->flash('success',__('site.updated_successfully') );
+        return redirect()->route('dashboard.users.index');
     }
 
     /**

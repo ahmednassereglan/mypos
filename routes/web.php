@@ -14,6 +14,10 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/error', function () {
+    return view('error');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
