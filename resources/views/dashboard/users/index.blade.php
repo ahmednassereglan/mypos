@@ -16,7 +16,7 @@
             </ol>
 
             <br>
-            <form action="" method="post">
+            <form action="{{ route('dashboard.users.index') }}" method="get">
               <div class="row">
                 <div class="col-md-4">
                   <input type="text" name="search" placeholder="@lang('site.search')" class="form-control">
@@ -92,7 +92,7 @@
 
                               </div><!-- /.box-body -->
                             @else
-                              @lang('site.no_data_found')
+                              <h2 style="padding-bottom: 20px;padding-right: 10px">@lang('site.no_data_found')</h2> 
                             @endif
                         </div>
                           <!-- /.card -->

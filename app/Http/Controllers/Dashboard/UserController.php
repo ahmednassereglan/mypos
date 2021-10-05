@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -21,9 +22,39 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::WhereRoleIs('admin')->get();
+        // .........................................
+        // search 1
+        // .........................................
+        // if($request->search){
+        //     $users = User::where('first_name','like','%'.$request->search.'%')
+        //     ->orWhere('last_name','like','%'.$request->search.'%')->get();
+        // }else{
+        //     $users = User::WhereRoleIs('admin')->get();
+        // }
+        // .........................................
+        // search 2
+        // .........................................
+
+        // $users = User::whereRoleIs('admin')->where(function($q) use ($request){
+        //     return $q->when($request->search,function($query) use ($request){
+
+        //        return $query ->where('first_name','like','%'.$request->search.'%')
+        //        ->orWhere('last_name','like','%'.$request->search.'%');
+        //     });
+        // })->get();
+
+        // .........................................
+        // search 3
+        // .........................................
+        $users = User::whereRoleIs('admin')->when($request->search,function($query) use ($request){
+            return $query ->where('first_name','like','%'.$request->search.'%')
+            ->orWhere('last_name','like','%'.$request->search.'%');
+        })->get();
+
+        // $users = DB::select('select * from users where active = ?', [1])
+        // $users = User::WhereRoleIs('admin')->get();
         return view('dashboard.users.index',compact('users'));
     }
 
