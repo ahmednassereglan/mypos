@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
+// use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
     [
@@ -14,10 +15,18 @@ Route::group(
 
 
             Route::get('/index', 'DashboardController@index')->name('index');
+
+            
             
 
             //user route 
             Route::resource('users', 'UserController')->except(['show']);
+
+
+            //category route 
+            Route::resource('categories', 'CategoryController')->except(['show']);
+
+            
             
         });//end of dashboard routes
         

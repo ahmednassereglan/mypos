@@ -60,23 +60,23 @@ return [
     'created_at' => 'تم اضافته',
 
     'products' => 'Products',
-    'product' => 'المنتج',
-    'quantity' => 'الكميه',
-    'total' => 'المجموع',
-    'purchase_price' => 'سعر الشراء',
-    'price' => 'السعر',
-    'sale_price' => 'سعر البيع',
-    'stock' => 'المخزن',
-    'profit_percent' => 'المكسب',
+    'product' => 'Product',
+    'quantity' => 'Quantity',
+    'total' => 'Total',
+    'purchase_price' => 'Purchase Price',
+    'price' => 'Price',
+    'sale_price' => 'Sale Price',
+    'stock' => 'Stock',
+    'profit_percent' => 'Profit Percent',
 
     'ar' => [
-        'name' => 'الاسم بالغه العربيه',
-        'description' => 'الوصف بالغه العربيه',
+        'name' => 'Name in Arabic',
+        'description' => 'Description in Arabic',
     ],
 
     'en' => [
-        'name' => 'الاسم بالغه الانجليزيه',
-        'description' => 'الوصف بالغه الانجليزيه',
+        'name' => 'Name in English',
+        'description' => 'Description in English',
     ],
 
 ];

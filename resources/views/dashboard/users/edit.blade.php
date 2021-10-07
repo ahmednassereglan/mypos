@@ -30,7 +30,7 @@
                                 @include('partials._errors')
  
 
-                                <form action="{{ route('dashboard.users.update' , $user->id ) }}" method="post">
+                                <form action="{{ route('dashboard.users.update' , $user->id ) }}" method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     {{ method_field('put') }}
                                     <div class="form-group">
@@ -44,6 +44,13 @@
                                     <div class="form-group">
                                         <label>@lang('site.email')</label>
                                         <input class="form-control" type="email"  value="{{ $user->email }}" name="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>@lang('site.image')</label>
+                                        <input class="form-control image" type="file" name="image">
+                                    </div>
+                                    <div class="form-group">
+                                        <img src="{{$user->image_path }}" style="width: 200px" class="image-preview img-thumbnail"  alt="">
                                     </div>
 
                                     <div class="form-group">
