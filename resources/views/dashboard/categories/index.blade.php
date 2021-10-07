@@ -54,6 +54,7 @@
                                   <thead>
                                     <th>#</th>
                                     <th>@lang('site.name')</th>
+                                    <th>@lang('site.action')</th>
                                     
                                   </thead>
                                   <tbody>
