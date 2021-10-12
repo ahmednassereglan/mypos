@@ -65,7 +65,7 @@
                                   <tbody>
                                     @foreach ($users as $index=>$user )
                                       <tr>
-                                        <td>{{ $index +1 }}</td>
+                                        <td>{{ $index +1 }}</td> 
                                         <td><img class="img-thumbnail" style="width: 95px;height: 95px;" src="{{ $user->image_path }}" alt=""></td>
                                         <td>{{ $user->first_name }}</td>
                                         <td>{{ $user->last_name }}</td>

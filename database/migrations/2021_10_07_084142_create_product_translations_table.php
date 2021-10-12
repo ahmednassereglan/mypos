@@ -14,13 +14,16 @@ class CreateProductTranslationsTable extends Migration
     public function up()
     {
         Schema::create('product_translations', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->string('name');
             $table->text('description');
             $table->string('locale')->index();
             $table->unique(['product_id','locale']);
+            
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        
+            //$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         
         });
     }

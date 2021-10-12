@@ -4,7 +4,7 @@
 
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{ asset('dashboard_files/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ Auth::user()->image_path }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</p>
@@ -19,14 +19,16 @@
                 <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-book" aria-hidden="true"></i><span>@lang('site.categories')</span></a></li>
             @endif
 
-            @if (auth()->user()->hasPermission('users-read'))
-                <li><a href=" {{ route('dashboard.users.index') }}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
-            @endif
-            {{--
-            @if (auth()->user()->hasPermission('read_products'))
+            @if (auth()->user()->hasPermission('products-read'))
                 <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-list"></i><span>@lang('site.products')</span></a></li>
             @endif
 
+            @if (auth()->user()->hasPermission('users-read'))
+                <li><a href=" {{ route('dashboard.users.index') }}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
+            @endif
+            
+            
+            {{--
             @if (auth()->user()->hasPermission('read_clients'))
                 <li><a href="{{ route('dashboard.clients.index') }}"><i class="fa fa-th"></i><span>@lang('site.clients')</span></a></li>
             @endif
