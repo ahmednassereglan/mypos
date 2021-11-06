@@ -22,6 +22,14 @@
                   <input type="text" name="search" placeholder="@lang('site.search')" class="form-control" value="{{ request()->search }}">
                 </div>
                 <div class="col-md-4">
+                  <select  class="form-control" name="category_id">
+                      <option value="">@lang('site.all_categories')</option>
+                  @foreach($categories as $index => $category)
+                      <option value="{{ $category->id }}"  {{ request()->category_id == $category->id ? 'selected' : ''  }}>{{ $category->name }}</option>
+                  @endforeach
+                  </select>
+                </div>
+                <div class="col-md-4">
                   <button class="btn btn-primary" type="submit"> @lang('site.search') <i class="fa fa-search" aria-hidden="true"></i></button>
                   
                   @if(auth()->user()->hasPermission('products-create'))
@@ -53,11 +61,12 @@
                                 <table class="table table-hover">
                                   <thead>
                                     <th>#</th>
+                                    <th>@lang('site.image')</th>
                                     <th>@lang('site.name')</th>
                                     <th>@lang('site.description')</th>
-                                    <th>@lang('site.image')</th>
                                     <th>@lang('site.purchase_price')</th>
                                     <th>@lang('site.sale_price')</th>
+                                    <th>@lang('site.profit_percent')</th>
                                     <th>@lang('site.stock')</th>
                                     <th>@lang('site.action')</th>
   
@@ -66,11 +75,12 @@
                                     @foreach ($products as $index=>$product )
                                       <tr>
                                         <td>{{ $index +1 }}</td>
+                                        <td><img class="img-thumbnail" style="width: 120px;height: 95px;" src="{{ $product->image_path }}" alt=""></td>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ $product->description }}</td>
-                                        <td><img src="{{ $product->image }}" alt=""></td>
+                                        <td>{!! $product->description !!}</td>                
                                         <td>{{ $product->purchase_price }}</td>
                                         <td>{{ $product->sale_price }}</td>
+                                        <td>{{ $product->profit_percent }} %</td>
                                         <td>{{ $product->stock }}</td>
                                         <td>
                                           @if(auth()->user()->hasPermission('products-update'))

@@ -44,7 +44,7 @@ return [
     'first_name' => 'الاسم الاول',
     'last_name' => 'الاسم الاخير',
     'email' => 'البريد الاكتروني',
-    'image' => 'صوره',
+    'image' => 'صورة',
     'action' => 'اكشن',
 
     'permissions' => 'الصلاحيات',

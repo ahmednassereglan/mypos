@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
+// use Mcamara\LaravelLocalization\LaravelLocalization;
+
 // use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(
@@ -24,6 +26,10 @@ Route::group(
 
             //product route 
             Route::resource('products', 'ProductController')->except(['show']);
+
+            
+            //client route 
+            // Route::resource('clients', 'ClientController')->except(['show']);
 
             
             

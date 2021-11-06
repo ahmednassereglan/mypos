@@ -161,7 +161,10 @@ return [
         'username'              => 'اسم المُستخدم',
         'year'                  => 'السنة',
         'image'                 => 'الصورة',
-        'permissions'           => 'الصلاحيات',
+        'category_id'           => 'القسم',
+        'purchase_price'        => 'سعر الشراء',
+        'sale_price'            => 'سعر البيع',
+        'stock'                 => 'المخزن',
         'ar' => [
             'name' => 'الاسم بالغه العربيه',
             'description' => 'الوصف بالغه العربيه',
